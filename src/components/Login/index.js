@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 
-import logo from './imgs/logo.svg'
+import logo from '../imgs/logo.svg'
 import './index.css'
 
 class Login extends Component {
