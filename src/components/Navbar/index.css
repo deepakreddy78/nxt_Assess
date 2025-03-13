@@ -1,0 +1,13 @@
+.nav-bar-container {
+  background-color: #263868;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.logout-button {
+  padding: 14px;
+  color: white;
+  border-color: white;
+  border-radius: 6px;
+  background: transparent;
+}

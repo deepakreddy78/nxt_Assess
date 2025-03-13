@@ -1,0 +1,42 @@
+.home-heading {
+  width: 22px;
+  color: #164687;
+}
+.instructions-num {
+  color: #164687;
+  font-weight: 500;
+}
+.home-para {
+  color: #164687;
+  font-weight: 500;
+}
+.home-ele {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 34px;
+}
+.home-card-details {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 2px;
+  margin-right: 22px;
+}
+.start-button {
+  border: none;
+  background-color: #164687;
+  color: #ffffff;
+  border-radius: 2px;
+  padding: 10px;
+  margin: 20px 0px 22px 0px;
+}
+
+@media only screen and (max-width: 768px) {
+  .home-ele {
+    display: flex;
+    flex-direction: column;
+  }
+  .instructions-img {
+    width: 400px;
+  }
+}
