@@ -36,7 +36,11 @@
     display: flex;
     flex-direction: column;
   }
+  .instructions-container {
+    order: -1; /* Moves the image to the top */
+  }
   .instructions-img {
     width: 400px;
+    order: 1;
   }
 }

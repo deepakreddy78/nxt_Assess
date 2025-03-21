@@ -34,7 +34,7 @@ class Home extends Component {
               Start Assessment
             </button>
           </div>
-          <div className="">
+          <div className="instructions-container">
             <img
               className="instructions-img"
               src={Instructions}
