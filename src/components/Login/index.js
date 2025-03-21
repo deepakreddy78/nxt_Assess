@@ -22,7 +22,7 @@ class Login extends Component {
   }
 
   onChangeCheckBoxValue = () => {
-    this.setState(prevState => ({checkBox: !prevState.checkBox}))
+    this.setState(preVal => ({checkBox: !preVal.checkBox}))
   }
 
   onSubmitSuccess = token => {
@@ -42,9 +42,6 @@ class Login extends Component {
     const URL = 'https://apis.ccbp.in/login'
     const option = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify(userDetails),
     }
     const response = await fetch(URL, option)
@@ -69,7 +66,6 @@ class Login extends Component {
           id="username"
           type="text"
           onChange={this.onChangeUserValue}
-          placeholder="Enter Username"
         />
       </div>
     )
@@ -88,7 +84,6 @@ class Login extends Component {
           id="password"
           type={checkBox ? 'text' : 'password'}
           onChange={this.onChangePasswordValue}
-          placeholder="Enter Password"
         />
       </div>
     )
@@ -97,7 +92,7 @@ class Login extends Component {
   renderCheckBox = () => (
     <div>
       <input
-        type="checkbox"
+        type="checkBox"
         onChange={this.onChangeCheckBoxValue}
         id="checkBox-val"
       />
