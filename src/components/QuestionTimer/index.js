@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-
+import OptionData from '../../Context/OptionData'
+import Questions from '../Question'
 import someThingWentWrong from '../imgs/sww.svg'
 import './index.css'
 
@@ -11,9 +12,9 @@ const apiStatusConstants = {
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
 }
+
 class QuestionTimer extends Component {
   state = {
-    //  optionData: [],
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -26,75 +27,92 @@ class QuestionTimer extends Component {
   }
 
   getOptionData = async () => {
-    this.setState({
-      apiStatus: apiStatusConstants.inProgress,
-    })
+    this.setState({apiStatus: apiStatusConstants.inProgress})
+
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/assess/questions'
-    const option = {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      method: 'GET',
-    }
-    const response = await fetch(apiUrl, option)
-    if (response.ok === true) {
-      const fetchData = await response.json()
-      console.log(fetchData)
-    }
-    if (response.status === 401) {
-      this.setState({
-        apiStatus: apiStatusConstants.failure,
+
+    try {
+      const response = await fetch(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const fetchData = await response.json()
+
+      const formattedData = fetchData.questions.map(item => ({
+        id: item.id,
+        questionText: item.question_text,
+        optionsType: item.options_type,
+        options: item.options.map(option => ({
+          id: option.id,
+          text: option.text,
+          imageUrl: option.image_url || null, // Add imageUrl for IMAGE type
+          isCorrect: option.is_correct === 'true',
+        })),
+      }))
+
+      const {updateQuestions} = this.context
+      updateQuestions(formattedData)
+      this.setState({apiStatus: apiStatusConstants.success})
+    } catch (error) {
+      console.error('Fetch error:', error)
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
   renderLoadingView = () => (
     <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#263868" height={50} width={50} />
+      <Loader
+        type="ThreeDots"
+        color="#263868"
+        height={50}
+        width={50}
+        aria-label="Loading questions"
+      />
     </div>
   )
 
   renderFailureView = () => (
-    <div>
+    <div className="failure-view-container">
       <img
         src={someThingWentWrong}
-        alt="failure view"
-        className="some-thing wnent wrong"
+        alt="Something went wrong"
+        className="failure-view-image"
       />
-      <div>
-        <h1 className="sww-heading">Oops! Something went wrong</h1>
-        <p className="sww-para">We are having some trouble</p>
-        <button
-          className="sww-btn"
-          type="button"
-          onClick={this.onClickRetryButton}
-        >
-          Retry
-        </button>
-      </div>
+      <h1 className="failure-view-heading">Oops! Something went wrong</h1>
+      <button
+        type="button"
+        onClick={this.onClickRetryButton}
+        className="retry-button"
+      >
+        Retry
+      </button>
     </div>
   )
 
+  renderSuccessView = () => <Questions />
+
   render() {
     const {apiStatus} = this.state
-    return (
-      <>
-        {() => {
-          switch (apiStatus) {
-            case apiStatusConstants.inProgress:
-              return this.renderLoadingView()
-            case apiStatusConstants.failure:
-              return this.renderFailureView()
-            case apiStatusConstants.success:
-              return <div>Success! Render your question data here.</div>
-            default:
-              return null
-          }
-        }}
-      </>
-    )
+
+    switch (apiStatus) {
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      case apiStatusConstants.success:
+        return this.renderSuccessView()
+      default:
+        return null
+    }
   }
 }
 
+QuestionTimer.contextType = OptionData
 export default QuestionTimer

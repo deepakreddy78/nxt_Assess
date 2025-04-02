@@ -1,0 +1,22 @@
+.submit-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.sub-heading {
+  color: #334155;
+}
+.sub-timeing {
+  color: #334155;
+}
+.sub-score {
+  color: #164687;
+}
+.sub-reattempt-button {
+  background-color: #164687;
+  color: #ffffff;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 4px;
+}

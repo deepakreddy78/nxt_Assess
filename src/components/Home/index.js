@@ -1,5 +1,6 @@
 import {Component} from 'react'
-import NavBar from '../Navbar'
+import {Link} from 'react-router-dom/cjs/react-router-dom.min'
+import NavBar from '../NavBar'
 
 import Instructions from '../imgs/Instructions.svg'
 import './index.css'
@@ -30,9 +31,11 @@ class Home extends Component {
               <span className="instructions-num">5.</span> All the progress will
               be lost, if you reload during the assessment
             </p>
-            <button className="start-button" type="button">
-              Start Assessment
-            </button>
+            <Link to="/assessment">
+              <button className="start-button" type="button">
+                Start Assessment
+              </button>
+            </Link>
           </div>
           <div className="instructions-container">
             <img
