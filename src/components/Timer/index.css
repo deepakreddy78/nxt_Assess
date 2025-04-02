@@ -2,7 +2,7 @@
   width: 550px;
   display: flex;
   background-color: #263868; /* Dark Blue */
-  color: white; 
+  color: white;
   padding: 0px 12px;
   border-radius: 4px;
   font-size: 14px;
@@ -13,8 +13,8 @@
   width: 420px;
   background-color: #263868;
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
   padding: 0px 10px;
   border: 1px solid #ccc;
   font-weight: bold;
