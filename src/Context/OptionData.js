@@ -15,6 +15,7 @@ const OptionData = React.createContext({
   updateStartQuestion: () => {},
   submitAnswer: () => {},
   getCurrentAnswer: () => {},
+  resetAssessment: () => {},
 })
 
 class OptionProvider extends Component {
@@ -78,6 +79,18 @@ class OptionProvider extends Component {
     this.setState({time: '00:00:00'})
   }
 
+  resetAssessment = () => {
+    this.setState(prevState => ({
+      time: '00:10:00',
+      score: 0,
+      capturedTime: null,
+      startTheNoOfQuestion: 0,
+      answered: 0,
+      unanswered: prevState.totalQuestions, //  Corrected to use previous state
+      answers: {},
+    }))
+  }
+
   render() {
     const {children} = this.props
     const {
@@ -110,6 +123,7 @@ class OptionProvider extends Component {
           submitAnswer: this.submitAnswer,
           getCurrentAnswer: this.getCurrentAnswer,
           clearTime: this.clearTime,
+          resetAssessment: this.resetAssessment,
         }}
       >
         {children}

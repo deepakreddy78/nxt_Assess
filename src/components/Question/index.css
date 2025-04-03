@@ -74,3 +74,12 @@ li {
   outline: none;
   border-color: #007bff;
 }
+@media (max-width: 400px) {
+  .question-container {
+    width: 310px;
+    overflow-x: hidden;
+  }
+  .option-image {
+    width: 280px;
+  }
+}

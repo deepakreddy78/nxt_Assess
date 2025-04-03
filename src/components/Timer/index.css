@@ -25,3 +25,17 @@
 .timer-heading {
   margin-left: 40px;
 }
+
+@media (max-width: 400px) {
+  .timer-10min {
+    width: 340px;
+  }
+  .timer-left {
+    margin-right: 22px;
+    font-size: 22px;
+  }
+  .timer-heading {
+    margin-left: 22px;
+    font-size: 22px;
+  }
+}

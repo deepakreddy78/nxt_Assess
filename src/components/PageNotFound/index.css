@@ -1,0 +1,25 @@
+.not-found-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pnf-heading {
+  color: #334155;
+}
+.pnf-para {
+  color: #64748b;
+}
+@media (max-width: 380px) {
+  .not-found-img {
+    width: 300px;
+  }
+  .pnf-para {
+    text-align: center;
+    font-size: 14px;
+  }
+  .pnf-heading {
+    font-size: 20px;
+  }
+}

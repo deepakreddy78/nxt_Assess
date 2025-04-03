@@ -8,7 +8,7 @@ class Submit extends Component {
   render() {
     return (
       <OptionData.Consumer>
-        {({capturedTime, score}) => (
+        {({capturedTime, score, resetAssessment}) => (
           <div className="submit-container">
             <img src={completed} className="sub-img" alt="submit" />
             <h1 className="sub-heading">
@@ -17,7 +17,11 @@ class Submit extends Component {
             <p className="sub-timeing">Time Taken: {capturedTime}</p>
             <h3 className="sub-score">Your Score: {score}</h3>
             <Link to="/assessment">
-              <button type="button" className="sub-reattempt-button">
+              <button
+                type="button"
+                onClick={resetAssessment}
+                className="sub-reattempt-button"
+              >
                 Reattempt
               </button>
             </Link>
